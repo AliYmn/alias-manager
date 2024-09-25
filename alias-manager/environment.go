@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"os"
 	"runtime"
@@ -22,7 +21,7 @@ func GetEnvironment() (Environment, error) {
 		Shell:  os.Getenv("SHELL"),
 	}
 	if env.OSType != "darwin" && env.OSType != "linux" {
-		err := errors.New(fmt.Sprintf("Unsupported OS: %s", env.OSType))
+		err := fmt.Errorf("unsupported OS: %s", env.OSType)
 		return env, err
 	}
 	return env, nil
