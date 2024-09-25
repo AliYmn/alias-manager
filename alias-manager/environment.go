@@ -16,14 +16,14 @@ type Environment struct {
 // GetEnvironment retrieves the current environment's OS and shell details.
 // If the OS is not macOS (darwin) or Linux, it returns an error.
 // Returns: error if the OS is unsupported, and the Environment struct.
-func GetEnvironment() (error, Environment) {
+func GetEnvironment() (Environment, error) {
 	env := Environment{
 		OSType: runtime.GOOS,
 		Shell:  os.Getenv("SHELL"),
 	}
 	if env.OSType != "darwin" && env.OSType != "linux" {
 		err := errors.New(fmt.Sprintf("Unsupported OS: %s", env.OSType))
-		return err, env
+		return env, err
 	}
-	return nil, env
+	return env, nil
 }
